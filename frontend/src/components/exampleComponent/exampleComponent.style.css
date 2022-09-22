@@ -1,0 +1,9 @@
+.example-component-wrapper{
+    padding : 0;
+    /* CSS CODE ...*/
+}
+
+/* SELECTING CHILD */
+.example-component-wrapper .child{
+    /* CSS CODE ...*/
+}
