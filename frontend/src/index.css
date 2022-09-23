@@ -9,6 +9,7 @@ body {
 
 body{
   width: 100%;
+  box-sizing: border-box;
   height : 100vh;
 }
 
@@ -33,4 +34,11 @@ body{
   --secondary : #F6E1C0;
   --danger : #F25E39;
   --danger-dark : #633333;
+}
+
+.horizontal-line{
+  width: 90%;
+  margin : auto;
+  height : 1.5px;
+  background-color: grey;
 }

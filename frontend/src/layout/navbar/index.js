@@ -10,15 +10,15 @@ const Navbar = (props) => {
       <div className="logo-wrapper"></div>
       <ul className="link-list">
         <li className="link-wrapper">
-          <NavLink className={"link"} to={"/home"}>
-            <FontAwesomeIcon icon={faHome} />
-            home
+          <NavLink className="link" to={"/home"}>
+            <FontAwesomeIcon className="link-icon" icon={faHome} />
+            <span className="link-text">home</span>
           </NavLink>
         </li>
         <li className="link-wrapper">
-          <NavLink className={"link"} to={"/addevent"}>
-            <FontAwesomeIcon icon={faPlus} />
-            event
+          <NavLink className="link" to={"/addevent"}>
+            <FontAwesomeIcon className="link-icon" icon={faPlus} />
+            <span className="link-text">event</span>
           </NavLink>
         </li>
       </ul>
