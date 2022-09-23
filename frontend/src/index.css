@@ -7,6 +7,16 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+body{
+  width: 100%;
+  height : 100vh;
+}
+
+#root{
+  height : 100%;
+  width: 100%;
+}
+
 *:after,*:before{
   box-sizing: border-box;
 }

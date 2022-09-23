@@ -1,0 +1,16 @@
+.navbar-wrapper{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right : 0;
+    display: inline;
+}
+
+.link-list{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding-left: 1rem;
+    column-gap: .3rem;
+    font-size: 1.2rem;
+}
