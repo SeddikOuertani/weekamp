@@ -1,4 +1,5 @@
 import React from "react";
+import './aside.style.css';
 
 const Aside = (props) => {
   return (

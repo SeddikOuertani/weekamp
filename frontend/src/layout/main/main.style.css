@@ -1,7 +1,7 @@
 .main-wrapper{
     position: fixed;
     height: 100%;
-    left : 200px;
     top : 50px;
     width: 100%;
+    margin : 0;
 }
