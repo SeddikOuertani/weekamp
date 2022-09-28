@@ -6,22 +6,17 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./store";
-import { addEvent, getEventList } from "./store/actions/event.actions";
-
 
 store.subscribe(() => console.log(store.getState()));
-store.dispatch(addEvent());
-store.dispatch(getEventList());
-store.dispatch(addEvent());
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
+  <Provider store={store}>
     <React.StrictMode>
-      <Provider store={store}>
         <App />
-      </Provider>
     </React.StrictMode>
+      </Provider>
   </BrowserRouter>
 );
 

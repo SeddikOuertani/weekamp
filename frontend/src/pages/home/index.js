@@ -11,7 +11,9 @@ const Home = (props) => {
           interested in
         </p>
       </div>
-      <div className="event-list"></div>
+      <div className="page-body">
+        <div className="event-list"></div>
+      </div>
     </div>
   );
 };

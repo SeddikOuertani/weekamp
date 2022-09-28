@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { useDispatch } from "react-redux";
 import "./App.css";
 import Main from "./layout/main";
 import Navbar from "./layout/navbar";
@@ -11,7 +12,8 @@ class App extends Component {
     this.state = { isLoggedIn: true };
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+  }
 
   componentDidUpdate() {}
 
