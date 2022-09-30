@@ -1,0 +1,8 @@
+/* for random reusable elements */
+
+.horizontal-line {
+    width: 90%;
+    margin: auto;
+    height: 1.5px;
+    background-color: grey;
+}

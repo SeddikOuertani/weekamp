@@ -8,6 +8,7 @@
     height : 50px;
     display: flex;
     align-items: center;
+    backdrop-filter: blur(8px);
 }
 
 .link-list{
@@ -25,14 +26,13 @@
     transition: all .2s ease-in-out;
     padding: .2rem .5rem;
     border-radius: .2rem;
-    color : var(--primary);
+    color : var(--secondary);
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .link-wrapper:hover{
-    color : var(--secondary);
     background-color: var(--primary);
 }
 

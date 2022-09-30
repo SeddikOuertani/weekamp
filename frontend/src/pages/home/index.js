@@ -3,7 +3,7 @@ import "./home.style.css";
 
 const Home = (props) => {
   return (
-    <div className="home-wrapper">
+    <div className="home-wrapper page-wrapper">
       <div className="page-header">
         <h1 className="page-title">welcome !</h1>
         <p className="page-description">
@@ -12,7 +12,6 @@ const Home = (props) => {
         </p>
       </div>
       <div className="page-body">
-        <div className="event-list"></div>
       </div>
     </div>
   );

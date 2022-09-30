@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { useDispatch } from "react-redux";
 import "./App.css";
+import Carousel from "./components/carousel";
 import Main from "./layout/main";
 import Navbar from "./layout/navbar";
 
@@ -23,6 +24,7 @@ class App extends Component {
         {this.state.isLoggedIn ? (
           <div className="layout">
             <Navbar />
+            <Carousel/>
             {/* <Aside /> */}
             <Main />
           </div>

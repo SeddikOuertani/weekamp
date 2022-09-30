@@ -1,7 +1,9 @@
 .main-wrapper{
-    position: fixed;
+    position: absolute;
     height: 100%;
-    top : 50px;
+    top : 80vh;
     width: 100%;
     margin : 0;
+    padding : 2rem 0;
+    background-color: var(--secondary-dark);
 }

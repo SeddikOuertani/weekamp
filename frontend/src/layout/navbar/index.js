@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHome, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faHome, faPlus, faTree } from "@fortawesome/free-solid-svg-icons";
 import "./navbar.style.css";
 
 const Navbar = (props) => {
@@ -21,7 +21,16 @@ const Navbar = (props) => {
             <span className="link-text">event</span>
           </NavLink>
         </li>
+        <li className="link-wrapper">
+          <NavLink className="link" to={"/events"}>
+            <FontAwesomeIcon className="link-icon" icon={faTree} />
+            <span className="link-text">events</span>
+          </NavLink>
+        </li>
       </ul>
+      <div className="personal-wrapper">
+        
+      </div>
     </div>
   );
 };

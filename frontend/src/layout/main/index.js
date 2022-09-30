@@ -1,5 +1,6 @@
 import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
+import Events from "../../pages/events";
 import Home from "../../pages/home";
 import "./main.style.css";
 
@@ -15,9 +16,17 @@ const Main = (props) => {
           path="/addevent"
           element={
             <React.Suspense fallback={<>loading ...</>}>
-              <AddEvent/>
+              <AddEvent />
             </React.Suspense>
-          } 
+          }
+        ></Route>
+        <Route
+          path="/events"
+          element={
+            <React.Suspense fallback={<>loading ...</>}>
+              <Events />
+            </React.Suspense>
+          }
         ></Route>
       </Routes>
     </div>

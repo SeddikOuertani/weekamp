@@ -3,7 +3,7 @@ import "./addevent.style.css";
 
 const AddEvent = (props) => {
   return (
-    <div className="add-event-wrapper">
+    <div className="add-event-wrapper page-wrapper">
       <div className="page-header">
         <h1 className="page-title">Create a new camping event</h1>
         <p className="page-description">
@@ -12,7 +12,7 @@ const AddEvent = (props) => {
         </p>
       </div>
       <div className="page-body">
-        <form className="add-event-form form">
+        <form>
           <div className="form-group">
             <label htmlFor="title">Event title</label>
             <input
@@ -25,7 +25,7 @@ const AddEvent = (props) => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="campsite">Champsite</label>
+            <label htmlFor="campsite">Campsite</label>
             <select className="input" id="campsite" name="campsite">
               <option hidden>Select campsite</option>
               <option value="capangela">Cap Angela</option>
@@ -36,34 +36,51 @@ const AddEvent = (props) => {
 
           <div className="form-group">
             <label htmlFor="period">Date Period</label>
-            <div id="period" className="date-row">
-              <input
-                type={"date"}
-                className="input"
-                id="startDate"
-                name="title"
-                placeholder="Event title"
-              />
-              <input
-                className="input"
-                id="endDate"
-                name="title"
-                type={"date"}
-                placeholder="Event title"
-              />
+            <div id="period" className="date-column">
+              <div className="date-row">
+                <span className="sub-label">Start date</span>
+                <span className="sub-label">End date </span>
+              </div>
+              <div className="date-row">
+                <input
+                  type={"date"}
+                  className="input"
+                  id="startDate"
+                  name="title"
+                  placeholder="Event title"
+                />
+
+                <input
+                  className="input"
+                  id="endDate"
+                  name="title"
+                  type={"date"}
+                  placeholder="Event title"
+                />
+              </div>
             </div>
           </div>
-          
+
           <div className="form-group">
-            <textarea id="description" name="description" className="text-area" placeholder="For any small additional input"/>
-          </div>
-          
-          <div className="form-group">
-            <label htmlFor="add-schedule">Want to add a schedule ?</label>
-            <button id="add-schedule" className="buttona">Click here</button>
+            <label htmlFor="description">Description</label>
+            <textarea
+              id="description"
+              name="description"
+              className="text-area"
+              placeholder="For any small additional input"
+            />
           </div>
 
-          <button type="submit" className="submit">Publish event</button>
+          <div className="form-group">
+            <label htmlFor="add-schedule">Want to add a schedule ?</label>
+            <button id="add-schedule" className="buttona">
+              Click here
+            </button>
+          </div>
+
+          <button type="submit" className="submit">
+            Publish event
+          </button>
         </form>
       </div>
     </div>

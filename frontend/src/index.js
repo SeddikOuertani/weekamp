@@ -12,11 +12,11 @@ store.subscribe(() => console.log(store.getState()));
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
-  <Provider store={store}>
-    <React.StrictMode>
+    <Provider store={store}>
+      <React.StrictMode>
         <App />
-    </React.StrictMode>
-      </Provider>
+      </React.StrictMode>
+    </Provider>
   </BrowserRouter>
 );
 
