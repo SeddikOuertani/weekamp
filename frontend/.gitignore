@@ -8,6 +8,9 @@
 # testing
 /coverage
 
+# adding assets
+!/src/assets
+
 # production
 /build
 
