@@ -1,9 +1,8 @@
 .main-wrapper{
     position: absolute;
     height: 100%;
-    top : 80vh;
+    top : 50px;
     width: 100%;
     margin : 0;
-    padding : 2rem 0;
     background-color: var(--secondary-dark);
 }

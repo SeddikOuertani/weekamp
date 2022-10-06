@@ -2,16 +2,20 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome, faPlus, faTree } from "@fortawesome/free-solid-svg-icons";
+import Logo from '../../assets/images/weekamp_logo.png';
 import "./navbar.style.css";
 
 const Navbar = (props) => {
   return (
     <div className="navbar-wrapper">
-      <div className="logo-wrapper"></div>
+      <div id={props.Id} className="navbar-outer-wrapper animation"/>
+      <div className="logo-wrapper">
+        <img className="logo" src={Logo} alt={"weekamp-logo"}/>
+      </div>
       <ul className="link-list">
         <li className="link-wrapper">
           <NavLink className="link" to={"/home"}>
-            <FontAwesomeIcon className="link-icon" icon={faHome} />
+            <FontAwesomeIcon className="link-icon" icon={faHome}/>
             <span className="link-text">home</span>
           </NavLink>
         </li>
@@ -28,9 +32,7 @@ const Navbar = (props) => {
           </NavLink>
         </li>
       </ul>
-      <div className="personal-wrapper">
-        
-      </div>
+      <div className="personal-wrapper"></div>
     </div>
   );
 };

@@ -1,0 +1,21 @@
+@font-face {
+    font-family: "Green Hostel";
+    src: url("../fonts/Green\ Hostel/Green\ Hostel-d67d.woff") format("woff");
+    src: url("../fonts/Green\ Hostel/GreenHostel-vma2y.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Love Nature 1";
+    src: url("../fonts/Love\ Nature/LoveNature-nRmEP.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Love Nature 2";
+    src: url("../fonts/Love\ Nature2/LoveNature-1GG8B.ttf") format("truetype");
+}
+
+
+@font-face {
+    font-family: "Raleway";
+    src: url("../fonts/Raleway/static/Raleway-Regular.ttf") format("truetype");
+}

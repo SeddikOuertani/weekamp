@@ -2,7 +2,8 @@
     /* Color pallet */
     --primary : #10A8A8;
     --primary-dark : #158486;
-    --secondary : #F6E1C0;
+    --secondary : #efd389;
+    --neutral : rgb(129, 129, 129);
     --danger : #F25E39;
     --danger-dark : #633333;
   }

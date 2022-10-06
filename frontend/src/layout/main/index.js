@@ -11,7 +11,7 @@ const Main = (props) => {
     <div className="main-wrapper">
       <Routes>
         <Route path="/" element={<Navigate to={"/home"} />}></Route>
-        <Route path="/home" element={<Home />}></Route>
+        <Route path="/home" element={<Home BlockInvertedRef={props.BlockInvertedRef}/>}></Route>
         <Route
           path="/addevent"
           element={

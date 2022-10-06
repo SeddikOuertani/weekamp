@@ -3,15 +3,33 @@
     top: 0;
     left: 0;
     right : 0;
-    display: inline;
     box-sizing: border-box;
     height : 50px;
     display: flex;
+    z-index: 1000;
     align-items: center;
     backdrop-filter: blur(8px);
 }
 
+.logo-wrapper{
+    z-index: inherit;
+    border-radius: 5px;
+    width: 200px;
+    max-height: 100%;
+    padding : 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-wrapper .logo {
+    max-height : 100%;
+    height : 40px;
+    width: 100%;
+}
+
 .link-list{
+    z-index: inherit;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -22,6 +40,7 @@
 }
 
 .link-wrapper{
+    z-index: inherit;
     cursor: pointer;
     transition: all .2s ease-in-out;
     padding: .2rem .5rem;
@@ -52,5 +71,34 @@
 }
 
 .link-icon{
+    z-index:inherit;
     font-size: .9rem;
+}
+
+.navbar-outer-wrapper{
+    position: fixed;
+    transform: translateX(-100vw);
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+    top: 0;
+    left: 0;
+    right : 0rem;
+    box-sizing: border-box;
+    min-height : 50px;
+    display: flex;
+    z-index: 900;
+    transition :all .2s ease-in-out ;
+}
+
+
+.animation {
+    animation : colorate .5s cubic-bezier(0.51, 0.91, 0.61, 0.95) forwards;
+}
+
+@keyframes colorate {
+    from{
+        transform: translateX(-100vw);
+    }
+    to{
+        transform: translateX(0);
+    }
 }
