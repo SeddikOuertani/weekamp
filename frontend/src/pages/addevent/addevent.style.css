@@ -1,0 +1,12 @@
+.add-event-wrapper{
+    display: flex;
+    position: absolute;
+}
+
+.add-event-wrapper .filter-header{
+    padding : .5rem
+}
+
+.add-event-wrapper .filter-body{
+
+}

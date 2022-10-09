@@ -1,5 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit";
-import * as actionTypes from "../actiontypes/event.actiontype";
+import * as actionTypes from "../actiontypes/event.actiontypes";
 
 let initialState = {
   events: [],
