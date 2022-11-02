@@ -5,15 +5,19 @@ import './pageExample.style.css';
 import ExampleComponent from '../../components/exampleComponent';
 
 
-const mode = 'login';
 
 class PageExample extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            mode: this.props.mode
         }
     }
+
+    componentDidMount(){
+        this.state.mode = "login"
+
+    }
+
     toggleMode() {
         var newMode = this.state.mode === 'login' ? 'signup' : 'login';
         this.setState({ mode: newMode});
@@ -38,13 +42,25 @@ class PageExample extends React.Component {
     }
 }
 
+// const submit = e => {
+//     if ({this.props.onSubmit}){
+//         e.preventDefault()
+//         fetch('/api', {
+//           method: 'POST',
+//           body: JSON.stringify({ user }),
+//           headers: { 'Content-Type': 'application/json' },
+//         })
+//           .then(res => res.json())
+//           .then(json => setUser(json.user))
+//     }
+//   }
 class LoginForm extends React.Component {
     constructor(props) {
         super(props);
     }
     render() {
         return (
-        <form onSubmit={this.props.onSubmit}>
+        <form onSubmit="submit">
             <div className="form-block__input-wrapper">
                 <div className="form-group form-group--login">
                     <Input type="text" id="username" label="user name" disabled={this.props.mode === 'signup'}/>
@@ -67,18 +83,18 @@ const Input = ({ id, type, label, disabled }) => (
     <input className="form-group__input" type={type} id={id} placeholder={label} disabled={disabled}/>
 );
 
-const App = () => (
-    <div className={`app app--is-${mode}`}>
-        <PageExample
-            mode={mode}
-            onSubmit={
-                function() {
-                    console.log('submit');
-                }
-            }
-        />
-    </div>
-);
+// const App = () => (
+//     <div className={`app app--is-${mode}`}>
+//         <PageExample
+//             mode={mode}
+//             onSubmit={
+//                 function() {
+//                     console.log('submit');
+//                 }
+//             }
+//         />
+//     </div>
+// );
 
  
 export default PageExample;
