@@ -4,6 +4,7 @@
     left : 0px;
     top : 50px;
     width: 200px !important;
+    min-width: 200px;
     border: 1px solid black;
     margin : 0;
     display: flex;

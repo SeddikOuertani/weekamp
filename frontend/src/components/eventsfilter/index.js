@@ -94,7 +94,7 @@ const EventsFilter = (props) => {
         </div>
 
         <div className="form-group">
-          <button type={"submit"} className="filter-btn">
+          <button type={"submit"} className="btn filter-btn">
             <FontAwesomeIcon icon={faFilter} />
             <span>FILTER</span>
           </button>

@@ -21,23 +21,28 @@ const App = (props) => {
     }
   };
 
-  const addingScrollListener = () => {
+  const navbarAnimateToggle = () => {
+    if (
+      (window.scrollY >= 0 && window.scrollY < 50) ||
+      window.scrollY >= 50 + window.innerHeight
+    ) {
+      runNavbarAnimation(true);
+    } else {
+      runNavbarAnimation(false);
+    }
+  };
+
+  const addingScrollListener = (pathname) => {
     if (pathname === "/home") {
-      window.addEventListener("scroll", () => {
-        if (
-          (window.scrollY >= 0 && window.scrollY < 50) ||
-          window.scrollY >= 50 + window.innerHeight
-        ) {
-          runNavbarAnimation(true);
-        } else {
-          runNavbarAnimation(false);
-        }
-      });
+      window.addEventListener("scroll", navbarAnimateToggle);
+    } else {
+      window.removeEventListener("scroll", navbarAnimateToggle);
+      runNavbarAnimation(false);
     }
   };
 
   useEffect(() => {
-    addingScrollListener();
+    addingScrollListener(pathname);
   }, [pathname]);
 
   return (

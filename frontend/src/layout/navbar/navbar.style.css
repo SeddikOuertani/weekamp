@@ -6,12 +6,14 @@
     box-sizing: border-box;
     height : 50px;
     display: flex;
+    justify-content: space-between;
     z-index: 1000;
     align-items: center;
     backdrop-filter: blur(8px);
+    padding-right: 1rem;
 }
 
-.logo-wrapper{
+.navbar-wrapper .logo-wrapper{
     z-index: inherit;
     border-radius: 5px;
     width: 200px;
@@ -22,24 +24,26 @@
     align-items: center;
 }
 
-.logo-wrapper .logo {
+.navbar-wrapper .logo-wrapper .logo {
     max-height : 100%;
     height : 40px;
     width: 100%;
 }
 
-.link-list{
+.navbar-wrapper .link-list{
     z-index: inherit;
     display: flex;
     flex-direction: row;
+    flex : 1;
     justify-content: flex-start;
     padding-left: 1rem;
     column-gap: .3rem;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     list-style: none;
+    
 }
 
-.link-wrapper{
+.navbar-wrapper .link-wrapper{
     z-index: inherit;
     cursor: pointer;
     transition: all .2s ease-in-out;
@@ -49,14 +53,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.link-wrapper:hover{
     background-color: var(--primary);
 }
 
+.navbar-wrapper .link-wrapper:hover{
+    background-color: var(--primary-dark);
+}
 
-.link{
+.navbar-wrapper .link{
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -66,16 +70,16 @@
     text-decoration: none;
 }
 
-.link:after{
+.navbar-wrapper .link:after{
     background-color: black;
 }
 
-.link-icon{
+.navbar-wrapper .link-icon{
     z-index:inherit;
     font-size: .9rem;
 }
 
-.navbar-outer-wrapper{
+.navbar-wrapper .navbar-outer-wrapper{
     position: fixed;
     transform: translateX(-100vw);
     background: linear-gradient(to right, var(--primary), var(--secondary));
@@ -89,8 +93,28 @@
     transition :all .2s ease-in-out ;
 }
 
+.navbar-wrapper .personal-wrapper{
+    display: flex;
+    flex-direction: row;
+    column-gap: .5rem;
+    justify-content: center;
+    align-items: center;
+    z-index: 900;
+}
 
-.animation {
+.navbar-wrapper .personal-wrapper .btn{
+    background-color: var(--primary);
+    color : var(--secondary);
+    column-gap: .3rem;
+    padding : .2rem .5rem;
+}
+
+.navbar-wrapper .personal-wrapper .btn:hover{
+    color : var(--secondary-light);
+    background-color: var(--primary-dark);
+}
+
+.navbar-wrapper .animation {
     animation : colorate .5s cubic-bezier(0.51, 0.91, 0.61, 0.95) forwards;
 }
 

@@ -1,12 +1,50 @@
 .add-event-wrapper{
+    width: 100%;
+    height : 100%;
+}
+
+.add-event-wrapper .form{
     display: flex;
-    position: absolute;
+    flex-direction: column;
+    width: 80%;
+    margin : auto;
 }
 
-.add-event-wrapper .filter-header{
-    padding : .5rem
+.add-event-wrapper .form .header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }
 
-.add-event-wrapper .filter-body{
-
+.add-event-wrapper .form .body{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
+
+.add-event-wrapper .form .body .image-section{
+    height : 40vh;
+    display: grid;
+    width: 100%;
+}
+
+.add-event-wrapper .form .body .image-section .form-image{
+    width: 100%;
+    border-radius: 5px;
+    border : 1px solid rgb(134, 134, 134);
+    grid-row: 1;
+    grid-column: 1;
+}
+
+.add-event-wrapper .add-event-icon-wrapper{
+    grid-row: 1;
+    grid-column: 1;
+    width: 100%;
+    height : 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
