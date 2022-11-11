@@ -1,0 +1,162 @@
+.add-program-wrapper {
+    width: 100%;
+    height: fit-content;
+    background-color: var(--secondary-lightest);
+    padding: 2rem 0;
+}
+
+.add-program-wrapper .horizontal-line {
+    margin: 1rem;
+    height: .5px;
+}
+
+.add-program-wrapper .content{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin: auto;
+    border-radius: 5px;
+    height: fit-content;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    padding: 1rem;
+}
+
+.add-program-wrapper .days-list{
+    display: flex;
+    flex-direction: column;
+    row-gap: .5rem;
+}
+
+.add-program-wrapper .day-wrapper{
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.add-program-wrapper .day-wrapper .day-header{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;    
+    align-items: center;
+    margin-bottom: .5rem;
+}
+
+.add-program-wrapper .day-wrapper .day-header h2{
+    color : var(--secondary)
+}
+
+
+.add-program-wrapper .day-wrapper .day-header .add-activity-btn{
+    background-color: rgba(0, 0, 0, 0);
+    color : var(--breaker);
+    padding : .5rem;
+    border-radius: .5rem;
+    font-size: 17px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: .3rem;
+    font-weight: 700;
+}
+
+.add-program-wrapper .day-wrapper .day-header .add-activity-btn:hover{
+    background-color: var(--breaker);
+    color : white
+}
+
+.add-program-wrapper .day-wrapper .day-activities{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.add-program-wrapper .day-wrapper .day-activities .activity-outer-wrapper {
+    width: 100%;
+}
+
+.add-program-wrapper .day-wrapper .day-activities .activity-wrapper{
+    width: 100%;
+    background-color: var(--secondary-light);
+    padding : .5rem;
+    border-radius: 5px;
+}
+
+.add-program-wrapper .activity-wrapper .activity-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.add-program-wrapper .activity-wrapper .activity-header .activity-actions{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    column-gap: .1rem;
+    align-items: center;
+    
+}
+
+.add-program-wrapper .activity-actions .btn{
+    font-size: 18px;
+    padding : .5rem;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0);
+    color : black
+}
+
+.add-program-wrapper .activity-actions .btn-edit:hover{
+   color : var(--info);
+}
+
+.add-program-wrapper .activity-actions .btn-delete:hover{
+    color :var(--danger)
+}
+
+.add-program-wrapper .activity-wrapper .description{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.add-program-wrapper .activity-wrapper .activity-footer{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    column-gap: 1rem;
+    font-size: 14px;
+}
+
+.add-program-wrapper .activity-wrapper .activity-footer .time {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: .5rem;
+}
+
+.add-program-wrapper .activity-footer .time-text{
+    font-weight: bold;
+    font-style: italic;
+}
+
+.add-program-wrapper .footer .btn-save-program{
+    background-color: rgba(0, 0, 0, 0);
+    color : var(--danger);
+    padding : .5rem;
+    font-size: 1rem;
+}
+
+.add-program-wrapper .footer .btn-save-program:hover{
+    background-color: var(--danger);
+    color : white;
+}
+
+
+
+

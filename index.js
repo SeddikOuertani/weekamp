@@ -36,7 +36,7 @@ db.mongoose
     process.exit();
   });
 
-//   // including routes
+//  ==========EXAMPLE including routes ====================
 // require("./src/routes/chatroom.routes")(app);
 // require("./src/routes/user.routes")(app);
 // require("./src/routes/message.routes")(app);

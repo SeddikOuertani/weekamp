@@ -4,8 +4,12 @@
     height: 100%;
 }
 
-.page-wrapper::-webkit-scrollbar {
-    width: 0px;
+.page-wrapper h1 {
+    font-size: 22px;
+}
+
+.page-wrapper h2 {
+    font-size: 20px;
 }
 
 .btn {
@@ -15,4 +19,55 @@
     justify-content: center;
     transition: all .2s ease-in-out;
     cursor: pointer;
+}
+
+.text-area {
+    background-color: rgb(248, 248, 248);
+    min-width: 100%;
+    border: none;
+    outline: none;
+    transition: all .2s ease-in-out;
+    border-radius: 5px;
+    padding: .5rem;
+    resize: none;
+}
+
+.text-area:hover {
+    background-color: white;
+}
+
+.text-area:focus {
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.form-rows {
+    display: flex;
+    flex-direction: column;
+    row-gap: .5rem;
+}
+
+.form-rows .form-rows-title {
+    display: flex;
+    justify-content: flex-start;
+}
+
+
+.form-rows .form-row {
+    display: flex;
+    flex-direction: row;
+    column-gap: .3rem;
+    flex: 1;
+}
+
+.form-rows .form-row .form-group {
+    display: flex;
+    flex-direction: column;
+    row-gap: .3rem;
+    justify-content: center;
+    align-items: flex-start;
+    flex: 1;
+}
+
+.form-rows .form-row .form-group label {
+    font-size: 18px;
 }

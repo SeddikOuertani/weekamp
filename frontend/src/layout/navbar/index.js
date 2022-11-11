@@ -1,28 +1,41 @@
 import React from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHome, faPhoneAlt, faPlus, faQuestionCircle, faTree, faUser } from "@fortawesome/free-solid-svg-icons";
-import Logo from '../../assets/images/weekamp_logo.png';
+import {
+  faHome,
+  faPhoneAlt,
+  faPlus,
+  faQuestionCircle,
+  faTree,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
+import Logo from "../../assets/images/weekamp_logo.png";
 import "./navbar.style.css";
 
 const Navbar = (props) => {
+  const { pathname } = useLocation();
 
   const navigate = useNavigate();
 
   const navigateToAddEvent = () => {
-    navigate("/addevent")
-  }
+    navigate("/events/addevent");
+  };
 
   return (
     <div className="navbar-wrapper">
-      <div id={props.Id} className="navbar-outer-wrapper animation"/>
+      <div
+        id={props.Id}
+        className={`navbar-outer-wrapper ${
+          pathname === "/home" ? "animation" : ""
+        }`}
+      />
       <div className="logo-wrapper">
-        <img className="logo" src={Logo} alt={"weekamp-logo"}/>
+        <img className="logo" src={Logo} alt={"weekamp-logo"} />
       </div>
       <ul className="link-list">
         <li className="link-wrapper">
           <NavLink className="link" to={"/home"}>
-            <FontAwesomeIcon className="link-icon" icon={faHome}/>
+            <FontAwesomeIcon className="link-icon" icon={faHome} />
             <span className="link-text">HOME</span>
           </NavLink>
         </li>
@@ -40,8 +53,8 @@ const Navbar = (props) => {
         </li>
       </ul>
       <div className="personal-wrapper">
-      <button onClick={navigateToAddEvent} className="btn add-event-btn">
-          <FontAwesomeIcon icon={faPlus}/>
+        <button onClick={navigateToAddEvent} className="btn add-event-btn">
+          <FontAwesomeIcon icon={faPlus} />
           <span className="text">EVENT</span>
         </button>
         <button className="btn btn-login">

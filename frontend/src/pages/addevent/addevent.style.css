@@ -1,50 +1,92 @@
-.add-event-wrapper{
+.add-event-wrapper {
     width: 100%;
-    height : 100%;
+    height: fit-content;
+    background-color: var(--secondary-lightest);
+    padding: 2rem 0;
 }
 
-.add-event-wrapper .form{
+.add-event-wrapper .horizontal-line {
+    margin: 1rem;
+    height: .5px;
+}
+
+.add-event-wrapper .form {
+    background-color: white;
     display: flex;
     flex-direction: column;
     width: 80%;
-    margin : auto;
+    margin: auto;
+    height: fit-content;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    padding: 1rem;
 }
 
-.add-event-wrapper .form .header{
+.add-event-wrapper .form .header {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
 }
 
-.add-event-wrapper .form .body{
+.add-event-wrapper .form .body {
     display: flex;
     flex-direction: column;
     width: 100%;
+    height: 100%;
 }
 
-.add-event-wrapper .form .body .image-section{
-    height : 40vh;
-    display: grid;
+.add-event-wrapper .form .body .form-image {
     width: 100%;
-}
-
-.add-event-wrapper .form .body .image-section .form-image{
-    width: 100%;
-    border-radius: 5px;
-    border : 1px solid rgb(134, 134, 134);
-    grid-row: 1;
-    grid-column: 1;
-}
-
-.add-event-wrapper .add-event-icon-wrapper{
-    grid-row: 1;
-    grid-column: 1;
-    width: 100%;
-    height : 100%;
+    min-height: 40vh;
     display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all .2s ease-in-out;
+}
+
+.add-event-wrapper .form .body .form-image:hover {
+    background-color: rgba(0, 0, 0, 0.111);
+}
+
+.add-event-wrapper .add-event-icon-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    font-size: 25px;
     justify-content: center;
     align-items: center;
 }
 
+.add-event-wrapper .form .footer {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+}
 
+.add-event-wrapper .form .footer .section .btn {
+    background-color: var(--primary);
+    color: var(--secondary-light);
+    padding: 1rem;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.add-event-wrapper .form .footer .section .add-program-btn {
+    display: flex;
+    flex-direction: row;
+    column-gap: .5rem;
+}
+
+.add-event-wrapper .form .footer .section .add-program-btn:hover {
+    background-color: var(--breaker);
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.add-event-wrapper .form .footer .section .submit-btn:hover {
+    background-color: var(--primary-dark);
+}
