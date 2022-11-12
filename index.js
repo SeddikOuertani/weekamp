@@ -37,9 +37,9 @@ db.mongoose
   });
 
 //  ==========EXAMPLE including routes ====================
-// require("./src/routes/chatroom.routes")(app);
-// require("./src/routes/user.routes")(app);
-// require("./src/routes/message.routes")(app);
+// require("./src/routes/event.routes")(app);
+// require("./src/routes/campsite.routes")(app);
+// require("./src/routes/program.routes")(app);
 
 // Create port
 const port = process.env.PORT || 8080;

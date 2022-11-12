@@ -6,4 +6,10 @@ const db = {};
 db.mongoose = mongoose;
 db.url = dbConfig.url;
 
+db.event = require('./event.model');
+db.program = require ('./program.modal');
+db.eventImage = require('./eventImage.model');
+db.campsite = require('./campsite.model');
+
+
 module.exports = db;
