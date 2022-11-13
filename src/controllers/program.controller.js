@@ -16,7 +16,7 @@ module.exports.create = async (req, res, next) => {
     const program = req.body;
     Program.create(program, (error, data) => {
       if (error) return invalidRequest(res, error);
-      return successfulRequestCreation(res, data);
+      return successfulRequestCreation(res);
     });
   } catch {
     res.status(401).json({

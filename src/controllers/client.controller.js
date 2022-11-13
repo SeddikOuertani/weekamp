@@ -1,6 +1,7 @@
 const db = require("../models");
-const Event = db.event;
+const Client = db.client;
 const Program = db.program;
+
 
 const {
   invalidRequest,
@@ -10,29 +11,14 @@ const {
   successfulRequestUpdating,
   successfulRequestDeleting,
 } = require("../utils/helper.util");
-const { getDaysDifference } = require("../utils/misc.util");
 
-// Create Event
+// Create Client
 module.exports.create = async (req, res, next) => {
   try {
-    const event = req.body;
-
-    //Calculating days period
-    let daysPeriod =
-      getDaysDifference(new Date(event.startDate), new Date(event.endDate)) + 1;
-
-    Event.create(event, async (error, data) => {
+    const client = req.body;
+    Client.create(client, (error, data) => {
       if (error) return invalidRequest(res, error);
-
-      //initializing program for this event
-      let resData = {
-        nbrDays: daysPeriod,
-        program: {
-          eventId: data._id,
-          days: [],
-        },
-      };
-      return successfulRequestCreation(res, resData);
+      return successfulRequestCreation(res);
     });
   } catch {
     res.status(401).json({
@@ -41,11 +27,11 @@ module.exports.create = async (req, res, next) => {
   }
 };
 
-// Get Event by ID
+// Get Client by ID
 module.exports.getById = async (req, res, next) => {
   try {
-    const idEvent = req.params.id;
-    Event.findById(idEvent, (error, data) => {
+    const idClient = req.params.id;
+    Client.findById(idClient, (error, data) => {
       if (error) return invalidRequest(res, error);
       if (!data) return notFoundRequest(res);
       return successfulRequestGetting(res, data);
@@ -57,10 +43,10 @@ module.exports.getById = async (req, res, next) => {
   }
 };
 
-// Get all Events
+// Get all Clients
 module.exports.getAll = async (req, res, next) => {
   try {
-    Event.find({}, (error, data) => {
+    Client.find({}, (error, data) => {
       if (error) return invalidRequest(res, error);
       if (!data) return notFoundRequest(res);
       return successfulRequestGetting(res, data);
@@ -72,11 +58,11 @@ module.exports.getAll = async (req, res, next) => {
   }
 };
 
-// Update event
+// Update client
 module.exports.update = async (req, res, next) => {
   try {
-    const event = req.body;
-    Event.findOneAndUpdate({ _id: event.id }, event, (error, data) => {
+    const client = req.body;
+    Client.findOneAndUpdate({ _id: client.id }, client, (error, data) => {
       if (error) return invalidRequest(res, error);
       if (!data) return notFoundRequest(res);
       return successfulRequestUpdating(res);
@@ -88,11 +74,11 @@ module.exports.update = async (req, res, next) => {
   }
 };
 
-// remove event
+// remove client
 module.exports.delete = async (req, res, next) => {
   try {
-    const idEvent = req.params.id;
-    Event.findOneAndDelete({ _id: idEvent }, (error, data) => {
+    const idClient = req.params.id;
+    Client.findOneAndDelete({ _id: idClient }, (error, data) => {
       if (error) return invalidRequest(res, error);
       if (!data) return notFoundRequest(res);
       return successfulRequestDeleting(res);

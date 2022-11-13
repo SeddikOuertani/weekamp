@@ -2,11 +2,11 @@ module.exports.invalidRequest = (res, error) =>{
     return res.status(400).send({message: "error sending request", error: error});
 }
 
-module.exports.successfulRequestCreation = (res, data) => {
-    return res.status(200).send({message : "created successfully"});
+module.exports.successfulRequestCreation = (res, data = {}) => {
+    return res.status(200).send({message : "created successfully", data : data});
 }
 
-module.exports.successfulRequestUpdating = (res, data) => {
+module.exports.successfulRequestUpdating = (res, data = {}) => {
     return res.status(200).send({message : "updated successfully"});
 }
 

@@ -10,4 +10,6 @@ module.exports = (app) => {
     router.get("/campsites", campsite.getAll);
     router.put("/campsites",campsite.update);
     router.delete("/campsites/:id", campsite.delete);
+
+    app.use(router)
 }

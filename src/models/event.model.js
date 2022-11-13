@@ -3,13 +3,12 @@ const Schema = mongoose.Schema;
 
 let Event = new Schema(
   {
-    creatorId : String,
-    campsiteId:  String,
-    name : String,
-    description : String,
-    startDate : Date,
-    endDate : Date,
-    programId : String,
+    creatorId: String,
+    campsiteId: String,
+    name: String,
+    description: String,
+    startDate: Date,
+    endDate: Date,
   },
   { collection: "Event", timestamps: true }
 );

@@ -20,7 +20,7 @@ app.use(
 app.use(logger("dev"));
 
 //using cors middleware
-app.use(cors({ origin: "http://localhost:3000" }));
+app.use(cors({origin : "http://localhost:3000"}));
 
 // Connecting with mongo db
 db.mongoose
@@ -37,12 +37,13 @@ db.mongoose
   });
 
 //  ==========EXAMPLE including routes ====================
-// require("./src/routes/event.routes")(app);
-// require("./src/routes/campsite.routes")(app);
-// require("./src/routes/program.routes")(app);
+require("./src/routes/client.route")(app);
+require("./src/routes/event.route")(app);
+require("./src/routes/program.route")(app);
+require("./src/routes/campsite.route")(app);
 
 // Create port
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 4000;
 http.listen(port, () => {
   console.log("Connected to port " + port);
 });

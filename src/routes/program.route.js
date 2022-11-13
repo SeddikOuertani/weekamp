@@ -10,4 +10,6 @@ module.exports = (app) => {
     router.get("/programs", program.getAll);
     router.put("/programs",program.update);
     router.delete("/programs/:id", program.delete);
+
+    app.use(router);
 }

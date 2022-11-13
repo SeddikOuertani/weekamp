@@ -1,4 +1,4 @@
-const baseUrl = "events/"
+const baseUrl = "events"
 
 export const GET_EVENT_LIST = `${baseUrl}/getAll`;
-export const ADD_EVENT = `${baseUrl}/add`;
+export const ADD_EVENT = `${baseUrl}/create`;

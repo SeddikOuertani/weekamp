@@ -3,21 +3,55 @@ import {
   faFeatherPointed,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import EventImage from "../../assets/images/camping_grounds2.jpg";
-import './eventelement.style.css';
+import { getCampsites } from "../../store/slices/campsite.slice";
+import { DotSpinner } from "../spinners";
+import "./eventelement.style.css";
 
 const EventElement = (props) => {
+  let [loading, setLoading] = useState(true);
+  const [currentCampsite, setCurrentCampsite] = useState(null);
+
+  const dispatch = useDispatch();
+
+  const campsites = useSelector((state) => state.campsites.campsites);
+  loading = useSelector((state) => state.campsites.campsitesLoading);
+
+  useEffect(() => {
+    dispatch(getCampsites());
+  }, []);
+
+  useEffect(() => {
+    if (!loading) {
+      let cc = campsites.find(
+        (campsite) => campsite._id === props.Event.campsiteId
+      );
+      setCurrentCampsite(cc);
+    }
+  }, [loading]);
+
   return (
     <div className="event-element-wrapper">
       <div className="image-wrapper">
-        <img src={EventImage} alt="event-image" />
+        <img src={EventImage} alt="event" />
       </div>
       <div className="info">
         <div className="header">
-          <h2 className="title">Campi maana</h2>
+          <h2 className="title">{props.Event.name}</h2>
           <div className="header-end">
-            <p className="campsite">Cap sirat</p>
+            <p className="campsite">
+              {currentCampsite ? (
+                currentCampsite.name
+              ) : (
+                <DotSpinner
+                  Color={"var(--primary)"}
+                  Size={30}
+                  Loading={loading}
+                />
+              )}
+            </p>
             <button className="btn join-btn">
               <FontAwesomeIcon icon={faFeatherPointed} />
               <span>Join</span>
@@ -25,20 +59,15 @@ const EventElement = (props) => {
           </div>
         </div>
         <div className="description-wrapper">
-          <p className="description">
-            this is a description test to test the event description display and
-            I'm making it long so that I can fully test it in terms of height
-            and width and all it's innuances. let's hope for the best
-          </p>
+          <p className="description">{props.Event.description}</p>
         </div>
         <div className="footer">
-        
           <div className="section">
             <p className="date-wrapper">
-              from :  <span className="date">12/11/2022</span>
+              from : <span className="date">{props.Event.startDate}</span>
             </p>
             <p className="date-wrapper">
-              to : <span className="date">15/11/2022</span>
+              to : <span className="date">{props.Event.endDate}</span>
             </p>
           </div>
           <div className="section">

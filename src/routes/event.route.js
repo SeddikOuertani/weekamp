@@ -10,4 +10,6 @@ module.exports = (app) => {
     router.get("/events", event.getAll);
     router.put("/events",event.update);
     router.delete("/events/:id", event.delete);
+
+    app.use(router)
 }
