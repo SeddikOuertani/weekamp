@@ -1,70 +1,39 @@
 import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { ActivityModal } from "../../components/modals";
 import "./addprogram.css";
 
 export const AddProgram = (props) => {
   const [days, setDays] = useState(null);
   const [isLoadingDays, setIsLoadingDays] = useState(true);
+  const [program, setProgram] = useState(null);
+
+  // const nbrDays =
+  const location = useLocation();
 
   useEffect(() => {
-    setDays([day1, day2]);
+    setProgram(programInit(location.state.nbrDays));
     setIsLoadingDays(false);
   }, []);
 
-  const day1 = {
-    id: 1,
-    activities: [
-      {
-        id: 1,
-        name: "activity1",
-        description: "activity 1 descriptuon",
-        startHour: "10:00",
-        endHour: "15:00",
-      },
-      {
-        id: 2,
-        name: "activity2",
-        description: "activity 2 descriptuon",
-        startHour: "15:30",
-        endHour: "16:00",
-      },
-      {
-        id: 3,
-        name: "activity3",
-        description: "activity 3 descriptuon",
-        startHour: "16:30",
-        endHour: "17:00",
-      },
-    ],
-  };
+  const programInit = (nbrDays) => {
+    const daySchema = (index) => {
+      return { number: index, activities: [] };
+    };
 
-  const day2 = {
-    id: 2,
-    activities: [
-      {
-        id: 4,
-        name: "activity4",
-        description: "activity 4 descriptuon",
-        startHour: "10:00",
-        endHour: "15:00",
-      },
-      {
-        id: 5,
-        name: "activity5",
-        description: "activity 5 descriptuon",
-        startHour: "15:30",
-        endHour: "16:00",
-      },
-      {
-        id: 5,
-        name: "activity6",
-        description: "activity 6 descriptuon",
-        startHour: "16:30",
-        endHour: "17:00",
-      },
-    ],
+    let programDays = [];
+    for (let i = 0; i < nbrDays; i++) {
+      programDays.push(daySchema(i + 1));
+    }
+
+    setDays(programDays);
+
+    return {
+      nbrDays: nbrDays,
+      days: programDays,
+    };
   };
 
   const Day = (props) => {
@@ -74,13 +43,22 @@ export const AddProgram = (props) => {
       let activities = day.activities;
       activities.splice(index, 1);
       setDay({ ...day, activities: activities });
+      setProgram({
+      })
+    };
+
+    const addActivity = (activity) => {
+      setDay({
+        ...day,
+        activities: [...day.activities, activity],
+      });
     };
 
     return (
       <div className="day-wrapper">
         <div className="day-header">
-          <h2>Day 1</h2>
-          <ActivityModal />
+          <h2>Day {props.Day.number}</h2>
+          <ActivityModal AddActivity={addActivity} />
         </div>
         <div className="day-activities">
           {props.Day.activities.map((activity, index) => {
@@ -151,7 +129,7 @@ export const AddProgram = (props) => {
         <div className="horizontal-line"></div>
         <div className="days-list">
           {!isLoadingDays
-            ? days.map((day, index) => {
+            ? program.days.map((day, index) => {
                 return <Day key={index + "day"} Day={day}></Day>;
               })
             : null}

@@ -10,29 +10,14 @@ const {
   successfulRequestUpdating,
   successfulRequestDeleting,
 } = require("../utils/helper.util");
-const { getDaysDifference } = require("../utils/misc.util");
 
 // Create Event
 module.exports.create = async (req, res, next) => {
   try {
     const event = req.body;
-
-    //Calculating days period
-    let daysPeriod =
-      getDaysDifference(new Date(event.startDate), new Date(event.endDate)) + 1;
-
     Event.create(event, async (error, data) => {
       if (error) return invalidRequest(res, error);
-
-      //initializing program for this event
-      let resData = {
-        nbrDays: daysPeriod,
-        program: {
-          eventId: data._id,
-          days: [],
-        },
-      };
-      return successfulRequestCreation(res, resData);
+      return successfulRequestCreation(res, data);
     });
   } catch {
     res.status(401).json({

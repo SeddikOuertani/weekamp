@@ -39,7 +39,6 @@ db.mongoose
 //  ==========EXAMPLE including routes ====================
 require("./src/routes/client.route")(app);
 require("./src/routes/event.route")(app);
-require("./src/routes/program.route")(app);
 require("./src/routes/campsite.route")(app);
 
 // Create port

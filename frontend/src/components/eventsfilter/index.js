@@ -52,6 +52,7 @@ const EventsFilter = (props) => {
             FontSize={"1.1rem"}
           />
         </div>
+        
         {/* Campsite type -- select -- */}
 
         <div className="form-group">

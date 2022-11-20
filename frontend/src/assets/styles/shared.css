@@ -70,5 +70,24 @@
 }
 
 .form-rows .form-row .form-group label {
-    font-size: 18px;
+    font-size: .1.05rem
+}
+
+
+.form-rows .form-row .form-group .errors{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.form-rows .form-row .form-group .errors small{
+    padding : .3rem .5rem;
+    font-size: 0.8rem;
+    width: 90%;
+    font-weight: bold;
+    color : var(--danger);
+    background-color: rgba(212, 96, 96, 0.205);
+    border: 0.5px solid var(--danger);
+    font-style: italic;
+    text-align: start;
 }

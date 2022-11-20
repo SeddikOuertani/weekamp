@@ -90,3 +90,15 @@
 .add-event-wrapper .form .footer .section .submit-btn:hover {
     background-color: var(--primary-dark);
 }
+
+.add-event-wrapper .form .footer .section .disabled {
+    background-color: var(--neutral-light);
+    color : var(--neutral);
+    cursor: auto;
+}
+
+.add-event-wrapper .form .footer .section .disabled:hover {
+   background-color: var(--neutral-light);
+   color : var(--neutral);
+}
+

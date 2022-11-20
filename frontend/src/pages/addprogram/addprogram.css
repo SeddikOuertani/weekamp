@@ -1,6 +1,6 @@
 .add-program-wrapper {
     width: 100%;
-    height: fit-content;
+    height: 100%;
     background-color: var(--secondary-lightest);
     padding: 2rem 0;
 }

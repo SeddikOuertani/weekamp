@@ -19,6 +19,8 @@ const customStyles = {
 
 export const ActivityModal = (props) => {
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [activityForm, setActivityForm] = useState(null);
+  const [isFormValid, setIsFormValid] = useState(true);
 
   const openModal = () => {
     setIsOpen(true);
@@ -28,13 +30,35 @@ export const ActivityModal = (props) => {
     setIsOpen(false);
   };
 
+  const onChangeHandler = (e) => {
+    setActivityForm({
+      ...activityForm,
+      [e.target.name]: e.target.value,
+    });
+
+    console.log({
+      ...activityForm,
+      [e.target.name]: e.target.value,
+    });
+  };
+
   const submitHandler = (e) => {
     e.preventDefault();
 
-    //LOGIC
-    console.log("perform logic here");
-
-    closeModal();
+    if (
+      !activityForm.name ||
+      !activityForm.description ||
+      !activityForm.startTime ||
+      !activityForm.endTime
+    ) {
+      setIsFormValid(false);
+      console.log("form isn't valid");
+      return;
+    } else {
+      setIsFormValid(true);
+      props.AddActivity(activityForm);
+      closeModal();
+    }
   };
 
   return (
@@ -59,26 +83,40 @@ export const ActivityModal = (props) => {
           </div>
           <div className="horizontal-line"></div>
           <div className="modal-content">
-            <form onSubmit={submitHandler} className="form">
+            <form className="form">
               <div className="form-rows">
                 <div className="form-row">
                   <div className="form-group">
                     <label htmlFor="eventName">Activity name</label>
                     <IconInput
+                      OnChange={onChangeHandler}
                       Placeholder={"What's your activity's name"}
                       Id={"activityName"}
+                      Name={"name"}
                     />
+                    <div className="errors">
+                      {!isFormValid && !activityForm.name ? (
+                        <small>This field is required</small>
+                      ) : null}
+                    </div>
                   </div>
                 </div>
                 <div className="form-row">
                   <div className="form-group">
                     <label htmlFor="eventName">Activity description</label>
                     <textarea
+                      onChange={onChangeHandler}
                       rows={4}
                       className="text-area"
+                      name="description"
                       placeholder={"write a small description"}
                       id={"eventName"}
                     />
+                    <div className="errors">
+                      {!isFormValid && !activityForm.description ? (
+                        <small>This field is required</small>
+                      ) : null}
+                    </div>
                   </div>
                 </div>
 
@@ -86,18 +124,32 @@ export const ActivityModal = (props) => {
                   <div className="form-group">
                     <label htmlFor="startTime">Start time</label>
                     <IconInput
+                      OnChange={onChangeHandler}
                       Type={"time"}
+                      Name={"startTime"}
                       Placeholder={"Starting hour"}
                       Id={"startTime"}
                     />
+                    <div className="errors">
+                      {!isFormValid && !activityForm.endTime ? (
+                        <small>This field is required</small>
+                      ) : null}
+                    </div>
                   </div>
                   <div className="form-group">
                     <label htmlFor="endTime">End time</label>
                     <IconInput
+                      OnChange={onChangeHandler}
                       Type={"time"}
+                      Name={"endTime"}
                       Placeholder={"Ending hour"}
                       Id={"endTime"}
                     />
+                    <div className="errors">
+                      {!isFormValid && !activityForm.endTime ? (
+                        <small>This field is required</small>
+                      ) : null}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -105,7 +157,7 @@ export const ActivityModal = (props) => {
           </div>
           <div className="horizontal-line"></div>
           <div className="modal-footer">
-            <button className="btn btn-save" type="submit">
+            <button className="btn btn-save" onClick={submitHandler}>
               SAVE
             </button>
             <button className="btn btn-cancel" onClick={closeModal}>

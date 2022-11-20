@@ -5,9 +5,10 @@
     --secondary : #efd389;
     --secondary-light : #f4e7c4;
     --secondary-lightest : #f8f0d9;
-    --neutral : rgb(3, 2, 2);
+    --neutral-light : rgb(219, 219, 219);
+    --neutral : rgb(119, 119, 119);
     --breaker : #E86A92;
-    --breaker-light : #eb90ad;
+    --breaker-light : #181616;
     --breaker-dark : #bf5979;
     --danger : #F25E39;
     --danger-dark : #633333;

@@ -5,11 +5,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import IconInput from "../../components/iconinput";
 import { getCampsites } from "../../store/slices/campsite.slice";
-import { compareDates } from "../../utils";
+import { checkFormErrors, compareDates, extractFormBody } from "../../utils";
 import "./addevent.style.css";
 
 const AddEvent = (props) => {
   const dispatch = useDispatch();
+
+  const [program, setProgram] = useState(null);
+  const [isDatesValid, setIsDatesValid] = useState(false);
+
   useEffect(() => {
     dispatch(getCampsites());
   }, []);
@@ -19,53 +23,113 @@ const AddEvent = (props) => {
 
   const navigate = useNavigate();
 
-  const [eventForm, setEventForm] = useState(null);
-  const [checkErrors, setCheckErrors] = useState(false);
+  const eventFormSchema = {
+    name: {
+      required: true,
+      empty: true,
+      value: null,
+    },
+    campsiteId: {
+      required: true,
+      empty: true,
+      value: null,
+    },
+    description: {
+      required: true,
+      empty: true,
+      value: null,
+    },
+    startDate: {
+      required: true,
+      empty: true,
+      value: null,
+    },
+    endDate: {
+      required: true,
+      empty: true,
+      value: null,
+    },
+  };
+
+  const [isFormValid, setIsFormValid] = useState(true);
+  const [eventForm, setEventForm] = useState(eventFormSchema);
 
   const onChangeHandler = (e) => {
-    setEventForm({
-      ...eventForm,
-      [e.target.name]: e.target.value,
-    });
-
-    if (e.target.name === "startDate" || e.target.name === "endDate") {
+    if (e.target.value.length > 0) {
+      setEventForm({
+        ...eventForm,
+        [e.target.name]: {
+          ...eventForm[e.target.name],
+          value: e.target.value,
+          empty: false,
+        },
+      });
+    } else {
+      setEventForm({
+        ...eventForm,
+        [e.target.name]: {
+          ...eventForm[e.target.name],
+          value: e.target.value,
+          empty: true,
+        },
+      });
     }
 
     console.log({
       ...eventForm,
-      [e.target.name]: e.target.value,
+      [e.target.name]: {
+        ...eventForm[e.target.name],
+        value: e.target.value,
+      },
     });
   };
 
+  useEffect(() => {
+    console.log("dates changed");
+    if (
+      eventForm.startDate.value !== null &&
+      eventForm.endDate.value !== null
+    ) {
+      if (compareDates(eventForm.startDate.value, eventForm.endDate.value)) {
+        setIsDatesValid(true);
+      } else {
+        setIsDatesValid(false);
+      }
+    }
+  }, [eventForm.startDate, eventForm.endDate]);
+
   const submitEvent = (e) => {
     e.preventDefault();
-    if(compareDates(eventForm.startDate, eventForm.endDate) === false){
-      setCheckErrors(true);
+    if (checkFormErrors(eventForm) === false) {
+      setIsFormValid(false);
       return;
     }
+
+    let formBody = extractFormBody(eventForm);
+    console.log(formBody);
+    return;
   };
 
   const navigateToAddProgram = () => {
-    navigate("/events/addevent/addprogram");
+    let nbrDays =
+      (new Date(eventForm.endDate.value) - new Date(eventForm.startDate.value)) /
+      (1000 * 3600 * 24);
+      console.log(eventForm.endDate.value)
+      console.log(nbrDays);
+    navigate("/events/addevent/addprogram", { state: { nbrDays } });
   };
 
   const RequiredErrorField = () => {
     return <small className="required">this field is required</small>;
   };
-  const StartDateError = () => {
-    return (
-      <small className="start-date-error">
-        the starting date should be smaller than the ending date
-      </small>
-    );
-  };
-  const EndDateError = () => {
-    return (
-      <small className="end-date-error">
-        the ending date should be bigger than the starting date
-      </small>
-    );
-  };
+
+  // const DateError = () => {
+  //   return (
+  //     <small className="start-date-error">
+  //       the starting date should be smaller than the ending date
+  //     </small>
+  //   );
+  // };
 
   return (
     <div className="add-event-wrapper page-wrapper">
@@ -99,6 +163,11 @@ const AddEvent = (props) => {
                   Placeholder={"Event name"}
                   Id={"eventName"}
                 />
+                {!isFormValid ? (
+                  <div className="errors">
+                    {eventForm.name.empty ? <RequiredErrorField /> : null}
+                  </div>
+                ) : null}
               </div>
             </div>
             <div className="form-row">
@@ -122,6 +191,11 @@ const AddEvent = (props) => {
                     <option>loading</option>
                   )}
                 </select>
+                {!isFormValid ? (
+                  <div className="errors">
+                    {eventForm.campsiteId.empty ? <RequiredErrorField /> : null}
+                  </div>
+                ) : null}
               </div>
             </div>
             <div className="form-row">
@@ -135,11 +209,13 @@ const AddEvent = (props) => {
                   placeholder="Write a small description for your event..."
                   id={"eventDescription"}
                 />
-                <div className="errors description-errors">
-                  <small className="required">
-                    A tiny description for your event is required
-                  </small>
-                </div>
+                {!isFormValid ? (
+                  <div className="errors">
+                    {eventForm.description.empty ? (
+                      <RequiredErrorField />
+                    ) : null}
+                  </div>
+                ) : null}
               </div>
             </div>
             <div className="form-row">
@@ -153,9 +229,11 @@ const AddEvent = (props) => {
                   Padding={".5rem"}
                   FontSize={"1.1rem"}
                 />
-                <div className="errors start-date-errors">
-                    
-                </div>
+                {!isFormValid ? (
+                  <div className="errors">
+                    {eventForm.startDate.empty ? <RequiredErrorField /> : null}
+                  </div>
+                ) : null}
               </div>
 
               <div className="form-group">
@@ -168,7 +246,11 @@ const AddEvent = (props) => {
                   Padding={".5rem"}
                   FontSize={"1.1rem"}
                 />
-                <div className="errors end-date-errors"></div>
+                {!isFormValid ? (
+                  <div className="errors">
+                    {eventForm.endDate.empty ? <RequiredErrorField /> : null}
+                  </div>
+                ) : null}
               </div>
             </div>
           </div>
@@ -177,8 +259,11 @@ const AddEvent = (props) => {
         <div className="footer">
           <div className="section">
             <button
+              disabled={isDatesValid ? false : true}
               onClick={navigateToAddProgram}
-              className="btn add-program-btn"
+              className={`btn add-program-btn ${
+                isDatesValid ? "" : "disabled"
+              }`}
             >
               <FontAwesomeIcon icon={faCalendarDays} />
               <span>ADD PROGRAM</span>
