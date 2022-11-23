@@ -16,14 +16,26 @@ const IconInput = (props) => {
       ) : null}
 
       <div className="input-wrapper">
-        <input
-          style={{ fontSize: props.FontSize }}
-          className="input"
-          name={props.Name}
-          onChange={props.OnChange}
-          placeholder={props.Placeholder}
-          type={props.Type}
-        />
+        {props.Value ? (
+          <input
+            value={props.Value ? props.Value : ""}
+            style={{ fontSize: props.FontSize }}
+            className="input"
+            name={props.Name}
+            onChange={props.OnChange}
+            placeholder={props.Placeholder}
+            type={props.Type}
+          />
+        ) : (
+          <input
+            style={{ fontSize: props.FontSize }}
+            className="input"
+            name={props.Name}
+            onChange={props.OnChange}
+            placeholder={props.Placeholder}
+            type={props.Type}
+          />
+        )}
       </div>
     </div>
   );

@@ -19,6 +19,7 @@ export const getCampsites = createAsyncThunk(
   }
 );
 
+
 const campsiteSlice = createSlice({
   name: "campsites",
   initialState,

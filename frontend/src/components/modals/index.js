@@ -3,7 +3,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import Modal from "react-modal";
 import IconInput from "../iconinput";
+import { DotSpinner } from "../spinners";
 import "./addactivity.modal.css";
+import "./notification.modal.css";
 
 const customStyles = {
   content: {
@@ -56,7 +58,7 @@ export const ActivityModal = (props) => {
       return;
     } else {
       setIsFormValid(true);
-      props.AddActivity(activityForm);
+      props.AddActivity(activityForm, props.DayNumber);
       closeModal();
     }
   };
@@ -163,6 +165,40 @@ export const ActivityModal = (props) => {
             <button className="btn btn-cancel" onClick={closeModal}>
               CANCEL
             </button>
+          </div>
+        </div>
+      </Modal>
+    </div>
+  );
+};
+
+export const NotificationModel = (props) => {
+  return (
+    <div className="notification-modal-wrapper">
+      <Modal
+        isOpen={props.Open}
+        ariaHideApp={false}
+        style={customStyles}
+        contentLabel="Example Modal"
+      >
+        <div className="modal-inner-wrapper">
+          <div className="header">
+            <h3>{props.Title}</h3>
+          </div>
+          <div className="horizontal-line" />
+          <div className="content">
+            <p className="text">
+              {props.ReqDesc}
+              {props.LoadingParam ? (
+                <span>
+                  <DotSpinner
+                    Loading={props.LoadingParam ? props.LoadingParam : true}
+                    Size={props.SpinnerSize}
+                  />
+                </span>
+              ) : null}
+              {props.Text ? <span>, {props.Text}</span> : null}
+            </p>
           </div>
         </div>
       </Modal>

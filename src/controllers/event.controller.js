@@ -1,6 +1,5 @@
 const db = require("../models");
 const Event = db.event;
-const Program = db.program;
 
 const {
   invalidRequest,
@@ -10,11 +9,36 @@ const {
   successfulRequestUpdating,
   successfulRequestDeleting,
 } = require("../utils/helper.util");
+const { getDaysDifference } = require("../utils/misc.util");
 
 // Create Event
 module.exports.create = async (req, res, next) => {
   try {
     const event = req.body;
+
+    if (event.program) {
+
+      let nbrDays = getDaysDifference(
+        new Date(event.starDate),
+        new Date(event.endDate)
+      );
+
+      let days = [];
+      for (let i = 0; i < nbrDays; i++) {
+        days.push({
+          number: i + 1,
+          activities: [],
+        });
+      }
+
+      event.program = {
+        nbrDays,
+        days,
+      };
+
+    }
+
+
     Event.create(event, async (error, data) => {
       if (error) return invalidRequest(res, error);
       return successfulRequestCreation(res, data);

@@ -1,22 +1,26 @@
 import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { ActivityModal } from "../../components/modals";
 import "./addprogram.css";
 
 export const AddProgram = (props) => {
-  const [days, setDays] = useState(null);
   const [isLoadingDays, setIsLoadingDays] = useState(true);
   const [program, setProgram] = useState(null);
 
   // const nbrDays =
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setProgram(programInit(location.state.nbrDays));
     setIsLoadingDays(false);
   }, []);
+
+  useEffect(() => {
+    console.log(program);
+  }, [program]);
 
   const programInit = (nbrDays) => {
     const daySchema = (index) => {
@@ -28,37 +32,57 @@ export const AddProgram = (props) => {
       programDays.push(daySchema(i + 1));
     }
 
-    setDays(programDays);
-
+    console.log({
+      nbrDays: nbrDays,
+      days: programDays,
+    });
     return {
       nbrDays: nbrDays,
       days: programDays,
     };
   };
 
+  const saveAndGoBackToEventForm = () => {
+    navigate("/events/addevent", {
+      state: { program, eventForm: location.state.eventForm },
+    });
+  };
+
   const Day = (props) => {
     const [day, setDay] = useState(props.Day);
-
     const removeActivity = (index) => {
       let activities = day.activities;
       activities.splice(index, 1);
-      setDay({ ...day, activities: activities });
+      
+      let programDay = {
+        ...program.days[day.number - 1],
+        activities: activities,
+      };
+
+      let programDays = program.days;
+      programDays[day.number - 1] = programDay;
       setProgram({
-      })
+        ...program,
+        days: programDays,
+      });
     };
 
-    const addActivity = (activity) => {
-      setDay({
-        ...day,
-        activities: [...day.activities, activity],
-      });
+    const addActivity = (activity, dayNumber) => {
+      let programDays = program.days;
+      let activityDay = programDays.find((day) => day.number === dayNumber);
+      activityDay.activities = [...day.activities, activity];
+      programDays[activityDay.number - 1] = activityDay;
+      setProgram({ ...program, days: programDays });
     };
 
     return (
       <div className="day-wrapper">
         <div className="day-header">
           <h2>Day {props.Day.number}</h2>
-          <ActivityModal AddActivity={addActivity} />
+          <ActivityModal
+            DayNumber={props.Day.number}
+            AddActivity={addActivity}
+          />
         </div>
         <div className="day-activities">
           {props.Day.activities.map((activity, index) => {
@@ -69,7 +93,7 @@ export const AddProgram = (props) => {
               >
                 <Activity
                   RemoveActivity={removeActivity}
-                  DayId={props.Day.id}
+                  DayNumber={props.Day.number}
                   ActivityIndex={index}
                   Activity={activity}
                 />
@@ -110,11 +134,15 @@ export const AddProgram = (props) => {
         </div>
         <div className="activity-footer">
           <p className="time">
-            <span className="time-text">Start hour : </span>
+            <span className="time-text">
+              Start hour : {props.Activity.startTime}{" "}
+            </span>
             {props.Activity.startHour}
           </p>
           <p className="time">
-            <span className="time-text">End Hour : </span>
+            <span className="time-text">
+              End Hour : {props.Activity.endTime}
+            </span>
             {props.Activity.endHour}
           </p>
         </div>
@@ -136,7 +164,12 @@ export const AddProgram = (props) => {
         </div>
         <div className="horizontal-line"></div>
         <div className="footer">
-          <button className="btn btn-save-program">SAVE</button>
+          <button
+            onClick={saveAndGoBackToEventForm}
+            className="btn btn-save-program"
+          >
+            SAVE
+          </button>
         </div>
       </div>
     </div>

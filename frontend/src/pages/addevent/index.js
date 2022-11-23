@@ -2,9 +2,11 @@ import { faCalendarDays, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import IconInput from "../../components/iconinput";
+import { NotificationModel } from "../../components/modals";
 import { getCampsites } from "../../store/slices/campsite.slice";
+import { addEvent } from "../../store/slices/event.slice";
 import { checkFormErrors, compareDates, extractFormBody } from "../../utils";
 import "./addevent.style.css";
 
@@ -14,12 +16,20 @@ const AddEvent = (props) => {
   const [program, setProgram] = useState(null);
   const [isDatesValid, setIsDatesValid] = useState(false);
 
+  const location = useLocation();
+
   useEffect(() => {
     dispatch(getCampsites());
+    if (location.state && location.state.program && location.state.eventForm) {
+      setProgram(location.state.program);
+      setEventForm(location.state.eventForm);
+    }
   }, []);
 
   const loading = useSelector((state) => state.campsites.campsitesLoading);
   const campsites = useSelector((state) => state.campsites.campsites);
+  const addEventPending = useSelector((state) => state.events.addEventLoading);
+  const addEventStatus = useSelector((state) => state.events.addEventStatus);
 
   const navigate = useNavigate();
 
@@ -53,6 +63,8 @@ const AddEvent = (props) => {
 
   const [isFormValid, setIsFormValid] = useState(true);
   const [eventForm, setEventForm] = useState(eventFormSchema);
+  const [notifModalOpen, setNotifModalOpen] = useState(false);
+  const [notifModalText, setNotifModalText] = useState("");
 
   const onChangeHandler = (e) => {
     if (e.target.value.length > 0) {
@@ -85,7 +97,6 @@ const AddEvent = (props) => {
   };
 
   useEffect(() => {
-    console.log("dates changed");
     if (
       eventForm.startDate.value !== null &&
       eventForm.endDate.value !== null
@@ -98,6 +109,28 @@ const AddEvent = (props) => {
     }
   }, [eventForm.startDate, eventForm.endDate]);
 
+  useEffect(() => {
+    if (["rejected", "fulfilled"].includes(addEventStatus)) {
+      if (addEventStatus === "fulfilled") {
+        setNotifModalText(
+          "Event added successfully, you will be redirected to the events page in a bit"
+        );
+      } else {
+        setNotifModalText(
+          "Failed to add event, please check your form for errors"
+        );
+      }
+      setTimeout(() => {
+        setNotifModalOpen(false);
+        navigate("/events");
+      }, 3000);
+    }
+  }, [addEventStatus]);
+
+  const launchNotifModal = () => {
+    setNotifModalOpen(true);
+  };
+
   const submitEvent = (e) => {
     e.preventDefault();
     if (checkFormErrors(eventForm) === false) {
@@ -107,32 +140,48 @@ const AddEvent = (props) => {
 
     let formBody = extractFormBody(eventForm);
     console.log(formBody);
+    if (program !== null) {
+      formBody.program = program;
+    }
+
+    dispatch(addEvent());
+    launchNotifModal();
+
     return;
   };
 
   const navigateToAddProgram = () => {
     let nbrDays =
-      (new Date(eventForm.endDate.value) - new Date(eventForm.startDate.value)) /
+      (new Date(eventForm.endDate.value) -
+        new Date(eventForm.startDate.value)) /
       (1000 * 3600 * 24);
-      console.log(eventForm.endDate.value)
-      console.log(nbrDays);
-    navigate("/events/addevent/addprogram", { state: { nbrDays } });
+    console.log(eventForm.endDate.value);
+    console.log(nbrDays);
+    navigate("/events/addevent/addprogram", { state: { nbrDays, eventForm } });
   };
 
   const RequiredErrorField = () => {
     return <small className="required">this field is required</small>;
   };
 
-  // const DateError = () => {
-  //   return (
-  //     <small className="start-date-error">
-  //       the starting date should be smaller than the ending date
-  //     </small>
-  //   );
-  // };
+  const DateError = () => {
+    return (
+      <small className="start-date-error">
+        the starting date should be smaller than the ending date
+      </small>
+    );
+  };
 
   return (
     <div className="add-event-wrapper page-wrapper">
+      <NotificationModel
+        Open={notifModalOpen}
+        Title={"Adding event"}
+        LoadingParam={addEventPending}
+        ReqDesc={`Request ${addEventStatus}`}
+        Text={notifModalText}
+      />
+
       <form onSubmit={submitEvent} className="form">
         <div className="header">
           <h1 className="title">Add event</h1>
@@ -158,6 +207,11 @@ const AddEvent = (props) => {
               <div className="form-group">
                 <label htmlFor="eventName">Event name</label>
                 <IconInput
+                  Value={
+                    location.state && eventForm.name.value
+                      ? eventForm.name.value
+                      : ""
+                  }
                   OnChange={onChangeHandler}
                   Name={"name"}
                   Placeholder={"Event name"}
@@ -174,13 +228,15 @@ const AddEvent = (props) => {
               <div className="form-group">
                 <label htmlFor="campsite">Campsite</label>
                 <select
-                  defaultValue={""}
+                  defaultValue={
+                    eventForm.campsiteId.value ? eventForm.campsiteId.value : ""
+                  }
                   onChange={onChangeHandler}
                   name={"campsiteId"}
                   className="select"
                   id={"campsite"}
                 >
-                  <option hidden>-- Choose a campsite --</option>
+                  <option hidden> -- Choose a campsite -- </option>
                   {!loading ? (
                     campsites.map((campsite, index) => (
                       <option key={campsite.name + index} value={campsite._id}>
@@ -203,6 +259,11 @@ const AddEvent = (props) => {
                 <label htmlFor="eventDescription">Event Description</label>
                 <textarea
                   onChange={onChangeHandler}
+                  value={
+                    location.state && eventForm.description.value
+                      ? eventForm.description.value
+                      : ""
+                  }
                   name="description"
                   rows={6}
                   className="text-area"
@@ -222,6 +283,11 @@ const AddEvent = (props) => {
               <div className="form-group">
                 <label htmlFor="endDate">Start date</label>
                 <IconInput
+                  Value={
+                    location.state && eventForm.startDate.value
+                      ? eventForm.startDate.value
+                      : "yyyy-mm-dd"
+                  }
                   OnChange={onChangeHandler}
                   Id={"startDate"}
                   Name={"startDate"}
@@ -239,6 +305,11 @@ const AddEvent = (props) => {
               <div className="form-group">
                 <label htmlFor="endDate">End date</label>
                 <IconInput
+                  Value={
+                    location.state && eventForm.endDate.value
+                      ? eventForm.endDate.value
+                      : "yyyy-mm-dd"
+                  }
                   OnChange={onChangeHandler}
                   Id={"endDate"}
                   Name={"endDate"}
