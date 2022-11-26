@@ -10,6 +10,6 @@ db.url = dbConfig.url;
 db.event = require('./event.model');
 db.eventImage = require('./eventImage.model');
 db.campsite = require('./campsite.model');
-db.client = require('./client.model');
+db.user = require('./user.model');
 
 module.exports = db;

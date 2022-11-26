@@ -3,6 +3,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { AddProgram } from "../../pages/addprogram";
 import Events from "../../pages/events";
 import Home from "../../pages/home";
+import Login from "../../pages/login";
 import "./main.style.css";
 
 const AddEvent = React.lazy(() => import("../../pages/addevent"));
@@ -12,7 +13,18 @@ const Main = (props) => {
     <div className="main-wrapper">
       <Routes>
         <Route path="/" element={<Navigate to={"/home"} />}></Route>
-        <Route path="/home" element={<Home BlockInvertedRef={props.BlockInvertedRef}/>}></Route>
+        <Route
+          path="/login"
+          element={
+            <React.Suspense fallback={<>loading ...</>}>
+              <Login />
+            </React.Suspense>
+          }
+        ></Route>
+        <Route
+          path="/home"
+          element={<Home BlockInvertedRef={props.BlockInvertedRef} />}
+        ></Route>
         <Route
           path="/events/addevent"
           element={

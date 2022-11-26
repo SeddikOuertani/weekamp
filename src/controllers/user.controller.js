@@ -1,27 +1,22 @@
-
-
-
-
-//========================EXEMPLE======================
-
 const db = require("../models");
-const Chatroom = db.chatroom;
+const User = db.user;
 
-// Create and Save a new chatroom
-exports.create = async (req, res) => {
+const {
+  invalidRequest,
+  successfulRequestCreation,
+  notFoundRequest,
+  successfulRequestGetting,
+  successfulRequestUpdating,
+  successfulRequestDeleting,
+} = require("../utils/helper.util");
+
+// Create User
+module.exports.create = async (req, res, next) => {
   try {
-    const newChatroom = req.body;
-
-    Chatroom.create(newChatroom, (error, data) => {
-      if (error) {
-        res
-          .status(400)
-          .json({ error: error, message: "Couldn't create chatroom" });
-      }
-      
-      res
-        .status(200)
-        .json({ message: "chatroom created successfully", data: data });
+    const user = req.body;
+    User.create(user, (error, data) => {
+      if (error) return invalidRequest(res, error);
+      return successfulRequestCreation(res, data);
     });
   } catch {
     res.status(401).json({
@@ -30,20 +25,14 @@ exports.create = async (req, res) => {
   }
 };
 
-exports.update = async (req, res) => {
+// Get User by ID
+module.exports.getById = async (req, res, next) => {
   try {
-    const chatroomId = req.params.chatroomId;
-    const newChatroom = req.body;
-
-    Chatroom.updateOne({ _id: chatroomId }, newChatroom, (error, data) => {
-      if (error) {
-        res
-          .status(400)
-          .json({ error: error, message: "Couldn't update chatroom" });
-      }
-      res
-        .status(200)
-        .json({ message: "chatroom updated successfully", data: data });
+    const idUser = req.params.id;
+    User.findById(idUser, (error, data) => {
+      if (error) return invalidRequest(res, error);
+      if (!data) return notFoundRequest(res);
+      return successfulRequestGetting(res, data);
     });
   } catch {
     res.status(401).json({
@@ -52,20 +41,13 @@ exports.update = async (req, res) => {
   }
 };
 
-//deletes a chatroom by its id
-exports.delete = async (req, res) => {
+// Get all Users
+module.exports.getAll = async (req, res, next) => {
   try {
-    const chatroomId = req.params.chatroomId;
-
-    Chatroom.deleteOne({ _id: chatroomId }, (error, data) => {
-      if (error) {
-        res
-          .status(400)
-          .json({ error: error, message: "Couldn't delete chatroom" });
-      }
-      res
-        .status(200)
-        .json({ message: "chatroom deleted successfully", data: data });
+    User.find({}, (error, data) => {
+      if (error) return invalidRequest(res, error);
+      if (!data) return notFoundRequest(res);
+      return successfulRequestGetting(res, data);
     });
   } catch {
     res.status(401).json({
@@ -74,21 +56,14 @@ exports.delete = async (req, res) => {
   }
 };
 
-//updates a chatroom by its id
-exports.update = async (req, res) => {
+// Update user
+module.exports.update = async (req, res, next) => {
   try {
-    const chatroomId = req.params.chatroomId;
-    const newChatroom = req.body;
-
-    Chatroom.updateOne({ _id: chatroomId }, newChatroom, (error, data) => {
-      if (error) {
-        res
-          .status(400)
-          .json({ error: error, message: "Couldn't update chatroom" });
-      }
-      res
-        .status(200)
-        .json({ message: "chatroom updated successfully", data: data });
+    const user = req.body;
+    User.findOneAndUpdate({ _id: user.id }, user, (error, data) => {
+      if (error) return invalidRequest(res, error);
+      if (!data) return notFoundRequest(res);
+      return successfulRequestUpdating(res);
     });
   } catch {
     res.status(401).json({
@@ -97,20 +72,14 @@ exports.update = async (req, res) => {
   }
 };
 
-//returns a chatroom by its id
-exports.getOne = async (req, res) => {
+// remove user
+module.exports.delete = async (req, res, next) => {
   try {
-    const chatroomId = req.params.id;
-
-    Chatroom.findById({ _id: chatroomId }, (error, data) => {
-      if (error) {
-        res
-          .status(400)
-          .json({ error: error, message: "Couldn't find chatroom" });
-      }
-      res
-        .status(200)
-        .json({ message: "chatroom found successfully", data: data });
+    const idUser = req.params.id;
+    User.findOneAndDelete({ _id: idUser }, (error, data) => {
+      if (error) return invalidRequest(res, error);
+      if (!data) return notFoundRequest(res);
+      return successfulRequestDeleting(res);
     });
   } catch {
     res.status(401).json({
@@ -118,24 +87,3 @@ exports.getOne = async (req, res) => {
     });
   }
 };
-
-// returns all chatrooms
-exports.getAll = async (req, res) => {
-  try {
-    Chatroom.find((error, data) => {
-      if (error) {
-        res
-          .status(400)
-          .json({ error: error, message: "Couldn't get chatrooms" });
-      }
-      res
-        .status(200)
-        .json({ message: "chatrooms found successfully", data: data });
-    });
-  } catch {
-    res.status(401).json({
-      error: "Invalid request !",
-    });
-  }
-};
-

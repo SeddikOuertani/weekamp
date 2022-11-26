@@ -7,6 +7,8 @@ const cors = require("cors");
 const app = express();
 const http = require("http").createServer(app);
 const { Server } = require("socket.io");
+const mongoose = require('mongoose');
+const bodyParser = require("body-parser")
 
 
 // using bodyparser middleware
@@ -37,7 +39,7 @@ db.mongoose
   });
 
 //  ==========EXAMPLE including routes ====================
-require("./src/routes/client.route")(app);
+require("./src/routes/user.routes")(app);
 require("./src/routes/event.route")(app);
 require("./src/routes/campsite.route")(app);
 
@@ -48,6 +50,20 @@ http.listen(port, () => {
 });
 
 // Find 404 and hand over to error handler
+
+
+app.use((req,res,next)=>{
+  res.setHeader("Access-Control-Allow-Origin","*")
+  res.setHeader(
+      "Access-Control-Allow-Headers","Origin, X-Reqyested-with , Content-Type , Accept"
+  )
+  res.setHeader(
+      "Access-Control-Allow-Methods","Get , POST, PATCH , DELETE, PUT , OPTIONS"
+  )
+  next()
+});
+
+module.exports = app;
 app.use((req, res, next) => {
   next(createError(404));
 });
