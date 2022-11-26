@@ -1,0 +1,28 @@
+.aside-wrapper{
+    position: fixed;
+    height : 100vh;
+    left : 0px;
+    top : 50px;
+    width: 200px !important;
+    min-width: 200px;
+    border: 1px solid black;
+    margin : 0;
+    display: flex;
+    flex-direction: column;
+    row-gap: .5rem;
+    padding : 0;
+}
+
+.aside-body{
+    display: flex;
+    padding : 1rem;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.aside-body .link-list{
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    row-gap: .3rem;
+}

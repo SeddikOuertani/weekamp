@@ -9,36 +9,8 @@ import Navbar from "./layout/navbar";
 
 const App = (props) => {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
-  const { pathname } = useLocation();
   const blockInvertedRef = useRef(null);
 
-  const runNavbarAnimation = (toggle) => {
-    let navbarElement = document.getElementById("navbar-backdrop");
-    if (toggle) {
-      navbarElement.classList.add("animation");
-    } else {
-      navbarElement.classList.remove("animation");
-    }
-  };
-
-  const addingScrollListener = () => {
-    if (pathname === "/home") {
-      window.addEventListener("scroll", () => {
-        if (
-          (window.scrollY >= 0 && window.scrollY < 50) ||
-          window.scrollY >= 50 + window.innerHeight
-        ) {
-          runNavbarAnimation(true);
-        } else {
-          runNavbarAnimation(false);
-        }
-      });
-    }
-  };
-
-  useEffect(() => {
-    addingScrollListener();
-  }, [pathname]);
 
   return (
     <div className="App">

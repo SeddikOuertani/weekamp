@@ -3,7 +3,14 @@
     --primary : #10A8A8;
     --primary-dark : #158486;
     --secondary : #efd389;
-    --neutral : rgb(129, 129, 129);
+    --secondary-light : #f4e7c4;
+    --secondary-lightest : #f8f0d9;
+    --neutral-light : rgb(219, 219, 219);
+    --neutral : rgb(119, 119, 119);
+    --breaker : #E86A92;
+    --breaker-light : #181616;
+    --breaker-dark : #bf5979;
     --danger : #F25E39;
     --danger-dark : #633333;
+    --info : rgb(51, 160, 160);
   }

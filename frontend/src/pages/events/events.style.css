@@ -1,0 +1,19 @@
+.events-wrapper{
+    display: flex;
+    position: absolute;
+    column-gap: .5rem;
+}
+
+.events-wrapper .filter-header{
+    padding : .5rem
+}
+
+.events-wrapper .events-list {
+    display : flex;
+    padding : .5rem;
+    flex-direction: column;
+    width: 100%;
+    row-gap: 2rem;
+}
+
+ 

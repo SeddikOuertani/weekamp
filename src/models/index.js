@@ -6,8 +6,10 @@ const db = {};
 db.mongoose = mongoose;
 db.url = dbConfig.url;
 
-//==========EXEMPLE=========
-//db.user = require("./user.model")
-//db.event = require("./event.model")
+
+db.event = require('./event.model');
+db.eventImage = require('./eventImage.model');
+db.campsite = require('./campsite.model');
+db.client = require('./client.model');
 
 module.exports = db;
