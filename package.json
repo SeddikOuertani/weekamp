@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build" : "npm run build",
     "start": "nodemon start index.js",
+    "build" : "npm --prefix ./frontend run build && npm start",
     "test": "node ./test/integration/index.js"
   },
   "keywords": [],
