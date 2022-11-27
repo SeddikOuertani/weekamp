@@ -15,23 +15,23 @@ pipeline {
         
         stage('Build') {
             steps {
-                git branch: 'main', url: 'https://github.com/SeddikOuertani/weekamp.git'
                 sh 'npm install'
-                sh 'npm run build'
+                sh 'npm run build '
             }
         }
         
-        stage('Test') {
-            steps {
-                sh './jenkins/scripts/test.sh'
-            }
-        }
-        stage('Deliver') {
-            steps {
-                sh './jenkins/scripts/deliver.sh'
-                input message: 'Finished using the web site? (Click "Proceed" to continue)'
-                sh './jenkins/scripts/kill.sh'
-            }
-        }
+        // stage('Test') {
+        //     steps {
+        //         sh "npm test"
+        //         sh './jenkins/scripts/test.sh'
+        //     }
+        // }
+        // stage('Deliver') {
+        //     steps {
+        //         sh './jenkins/scripts/deliver.sh'
+        //         input message: 'Finished using the web site? (Click "Proceed" to continue)'
+        //         sh './jenkins/scripts/kill.sh'
+        //     }
+        // }
     }
 }
