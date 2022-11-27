@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build" : "npm run build",
     "start": "nodemon start index.js",
     "test": "node ./test/integration/index.js"
   },
