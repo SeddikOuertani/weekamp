@@ -15,7 +15,7 @@ pipeline {
         
         stage('Build') {
             steps {
-                sh 'npm install'
+                sh 'cat /etc/lsb-release'
                 sh 'npm run build '
             }
         }
