@@ -15,7 +15,10 @@ pipeline {
         
         stage('Build') {
             steps {
-                sh 'npm run build '
+                sh 'npm install'
+                sh 'npm run build'
+                sh 'npm install --prefix ./frontend'
+                sh 'npm --prefix ./frontend run build'
             }
         }
         
