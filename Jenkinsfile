@@ -8,12 +8,19 @@ pipeline {
     environment {
         CI = 'true'
     }
+    
+    tools {nodejs "Nodejs_auto"}
+
     stages {
+        
         stage('Build') {
             steps {
+                git branch: 'main', url: 'https://github.com/SeddikOuertani/weekamp.git'
+                sh 'npm install'
                 sh 'npm run build'
             }
         }
+        
         stage('Test') {
             steps {
                 sh './jenkins/scripts/test.sh'
