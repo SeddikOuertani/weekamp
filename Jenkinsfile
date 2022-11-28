@@ -15,10 +15,7 @@ pipeline {
         
         stage('Build') {
             steps {
-                sh 'npm cache clean --force'
-                sh 'npm build'
-                sh 'npm install --prefix ./frontend'
-                sh 'npm --prefix ./frontend run build'
+                sh 'npm build && npm --prefix ./frontend run build '
             }
         }
         

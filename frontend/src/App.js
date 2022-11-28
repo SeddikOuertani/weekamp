@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, {useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import "./App.css";
 import Main from "./layout/main";
@@ -11,6 +11,10 @@ const App = (props) => {
   const blockInvertedRef = useRef(null);
 
   const { pathname } = useLocation();
+
+  useEffect(()=>{
+
+  }, [setIsLoggedIn])
 
   return (
     <div className="App">

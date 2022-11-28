@@ -21,8 +21,9 @@ const EventElement = (props) => {
 
   useEffect(() => {
     dispatch(getCampsites());
-  }, []);
+  }, []); 
 
+  
   useEffect(() => {
     if (!loading) {
       let cc = campsites.find(
