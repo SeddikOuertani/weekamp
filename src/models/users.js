@@ -7,4 +7,4 @@ const userSchema = new mongoose.Schema({
     salt : String
 })
 
-module.exports = mongoose.model("client " , userSchema)
+module.exports = mongoose.model("User" , userSchema)

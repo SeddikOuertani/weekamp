@@ -23,7 +23,7 @@ app.use(
 app.use(logger("dev"));
 
 //using cors middleware
-app.use(cors({ origin: "http://localhost:3000" }));
+app.use(cors({ origin: "http://localhost:3006" }));
 
 // Connecting with mongo db
 db.mongoose
@@ -45,7 +45,7 @@ db.mongoose
 // require("./src/routes/message.routes")(app);
 
 // Create port
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 3000;
 http.listen(port, () => {
   console.log("Connected to port " + port);
 });
@@ -59,7 +59,7 @@ app.use((req,res,next)=>{
       "Access-Control-Allow-Headers","Origin, X-Reqyested-with , Content-Type , Accept"
   )
   res.setHeader(
-      "Access-Control-Allow-Methods","Get , POST, PATCH , DELETE, PUT , OPTIONS"
+      "Access-Control-Allow-Methods","GET , POST, PATCH , DELETE, PUT , OPTIONS"
   )
   next()
 });
@@ -72,8 +72,8 @@ app.get("/users",(req,res,next)=>{
           users
       })
   });
-  
 })
+
 app.get("/api/users/:id",async (req,res)=>{
  users.findById(req.params.id).then(documents =>{
      res.status(200).json({
@@ -113,7 +113,7 @@ app.delete("/api/users/:name",(req,res,next)=>{
   users.deleteOne({
       name : req.params.name
   })
-  .then (res.status(200).json({message : "Post deleted!"}))
+  .then (res.status(200).json({message : "User deleted!"}))
   
 })
 
