@@ -283,11 +283,6 @@ const AddEvent = (props) => {
               <div className="form-group">
                 <label htmlFor="endDate">Start date</label>
                 <IconInput
-                  Value={
-                    location.state && eventForm.startDate.value
-                      ? eventForm.startDate.value
-                      : "yyyy-mm-dd"
-                  }
                   OnChange={onChangeHandler}
                   Id={"startDate"}
                   Name={"startDate"}
@@ -305,11 +300,6 @@ const AddEvent = (props) => {
               <div className="form-group">
                 <label htmlFor="endDate">End date</label>
                 <IconInput
-                  Value={
-                    location.state && eventForm.endDate.value
-                      ? eventForm.endDate.value
-                      : "yyyy-mm-dd"
-                  }
                   OnChange={onChangeHandler}
                   Id={"endDate"}
                   Name={"endDate"}
